@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        * {
+            font-family: Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 2em;
+            margin: 0;
+            padding: 50px;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        input, select {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Bem vindo a calculadora!</h2>
+
+    <form>
+        <label>Operando 1</label>
+        <input type="text" name="operand1" />
+        <br />
+
+        <label>Operando 2</label>
+        <input type="text" name="operand2" />
+        <br />
+        
+        <label>Operador</label>
+        <select name="operator">
+            <option value="sum">Soma</option>
+            <option value="subtract">Subtração</option>
+            <option value="multiply">Multiplicação</option>
+            <option value="divide">Divisão</option>
+        </select>
+        <br />
+
+        <button>Calcular</button>
+    </form>
+    <p>Vamos calcular algo hoje?</p>
+    <script>
+        const operand1 = document.querySelector('[name=operand1]');
+        const operand2 = document.querySelector('[name=operand2]');
+        const operator = document.querySelector('[name=operator]');
+        operand1.focus();
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            fetch(`//${location.host}/calculate?operand1=${operand1.value}&operand2=${operand2.value}&operator=${operator.value}`)
+                .then((resp) => resp.json())
+                .then((data) => {
+                    document.querySelector('p')
+                        .innerHTML = `Seu resultado é: ${data.result}`;
+                });
+        });
+    </script>
+</body>
+</html>
