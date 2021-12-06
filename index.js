@@ -4,6 +4,8 @@ const port = process.env.PORT || '3000';
 
 const calculator = require('./calculator');
 
+app.use(express.static('public'))
+
 app.get('/calculate', (req, res) => {
     const result = calculator.calculate(req.query.operand1, req.query.operand2, req.query.operator);
     res.json({ result });
