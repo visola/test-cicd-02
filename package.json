@@ -22,6 +22,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "jest": "^27.4.3"
+    "jest": "^27.4.3",
+    "selenium-webdriver": "^4.1.0"
   }
 }
