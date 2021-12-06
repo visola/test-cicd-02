@@ -1,5 +1,22 @@
+// Os "smoke tests" são testes automatizados para garantir que
+// a aplicação está funcionando corretamente. Eles fazem parte
+// de um conjunto de testes chamado testes de integração onde
+// a aplicação é testada num ambiente real (integrando todos os módulos)
+// mais próximo de produção possível.
+
+// Para estes testes utilizamos o Selenium Web Driver, que tem integração
+// com diversos browsers. Nestes testes usamos o Chrome mas é possível utilizar
+// os testes em mais de um browser se tiver a máquina configurada corretamente.
+
+// Selenium: https://www.selenium.dev/
+// Selenium Webdriver para Node.js: https://www.npmjs.com/package/selenium-webdriver
+
 const {Builder, By, Key, until} = require('selenium-webdriver');
 
+// Nesta linha a URL para ser testada na linha de comando como um argumento.
+// Isso significa que os mesmos testes podem ser rodados em qualquer ambiente: local, dev, stage, prod, etc.
+// Para rodar os testes apontando para o ambiente local, use o comando: node smoke-test.js
+// Para rodar num ambiente específico, use o comando: node smoke-test.js {url}, exemplo:  node smoke-test.js https://test-cicd-02.herokuapp.com/
 const url = process.argv[2] || 'http://localhost:3000';
 
 async function clearForm(driver) {
@@ -24,6 +41,7 @@ async function assertResultIs(driver, message) {
 }
 
 (async function suite() {
+    // Mude esta linha para testar em outros browsers
     let driver = await new Builder().forBrowser('chrome').build();
     try {
         await driver.get(url);

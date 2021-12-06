@@ -1,3 +1,11 @@
+// Os testes unitários para o nosso serviço.
+// Aqui garantimos que a lógica de negócio está correta e
+// pode ser testada automaticamente e rapidamente num ambiente
+// de integração contínua como o GitHub Workflows.
+
+// Para estes testes usamos o Jest: https://jestjs.io/
+
+// Para rodar os testes, na linha de comando rode: "npm test"
 const calculator = require('./calculator');
 
 test('1 + 1 = 2', () => {
